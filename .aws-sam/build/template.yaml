@@ -2,7 +2,7 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: 'tech_challenge_g31_lambda
 
-  Sample SAM Template for vtech_challenge_g31_lambda
+  Sample SAM Template for tech_challenge_g31_lambda
 
   '
 Globals:
@@ -10,16 +10,16 @@ Globals:
     Timeout: 3
     MemorySize: 128
 Resources:
-  HelloWorldFunction:
+  ValidateClientFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: HelloWorldFunction
+      CodeUri: ValidateClientFunction
       Handler: index.lambdaHandler
       Runtime: nodejs16.x
       Architectures:
       - x86_64
       Events:
-        HelloWorld:
+        ValidateCustomer:
           Type: Api
           Properties:
             Path: /
@@ -31,21 +31,21 @@ Resources:
         - index.ts
         Minify: true
         Target: es2020
-      SamResourceId: HelloWorldFunction
+      SamResourceId: ValidateClientFunction
 Outputs:
-  HelloWorldApi:
+  ValidateClientApi:
     Description: API Gateway endpoint URL for Prod stage for Hello World function
     Value:
       Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/
-  HelloWorldFunction:
+  ValidateClientFunction:
     Description: Hello World Lambda Function ARN
     Value:
       Fn::GetAtt:
-      - HelloWorldFunction
+      - ValidateClientFunction
       - Arn
-  HelloWorldFunctionIamRole:
+  ValidateClientFunctionIamRole:
     Description: Implicit IAM Role created for Hello World function
     Value:
       Fn::GetAtt:
-      - HelloWorldFunctionRole
+      - ValidateClientFunctionRole
       - Arn

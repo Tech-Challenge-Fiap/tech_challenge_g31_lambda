@@ -12,7 +12,7 @@ Globals:
     MemorySize: 128
 
 Resources:
-  HelloWorldFunction:
+  ValidateClientFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: validate-client/
@@ -21,7 +21,7 @@ Resources:
       Architectures:
         - x86_64
       Events:
-        HelloWorld:
+        ValidateCustomer:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /
@@ -39,12 +39,12 @@ Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
   # Find out more about other implicit resources you can reference within SAM
   # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
-  ValidateCustomerApi:
-    Description: "API Gateway endpoint URL for Prod stage for Validate Customer function"
+  ValidateClientApi:
+    Description: "API Gateway endpoint URL for Prod stage for Hello World function"
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
-  ValidateCustomer:
-    Description: "Validate Customer Lambda Function ARN"
-    Value: !GetAtt ValidateCustomer.Arn
-  ValidateCustomerIamRole:
-    Description: "Implicit IAM Role created for Validate Customer function"
-    Value: !GetAtt ValidateCustomerRole.Arn
+  ValidateClientFunction:
+    Description: "Hello World Lambda Function ARN"
+    Value: !GetAtt ValidateClientFunction.Arn
+  ValidateClientFunctionIamRole:
+    Description: "Implicit IAM Role created for Hello World function"
+    Value: !GetAtt ValidateClientFunctionRole.Arn
