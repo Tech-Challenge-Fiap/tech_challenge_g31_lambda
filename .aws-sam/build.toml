@@ -7,7 +7,7 @@ architecture = "x86_64"
 handler = "validate-client/index.lambdaHandler"
 manifest_hash = "35ac7d3e6a4fb9e24ce98ded30529295"
 packagetype = "Zip"
-functions = ["HelloWorldFunction"]
+functions = ["ValidateClientFunction"]
 
 [function_build_definitions.531c16f9-b0e9-41e7-8e11-0152f4118e6e.metadata]
 BuildMethod = "esbuild"
@@ -16,6 +16,9 @@ BuildMethod = "esbuild"
 Minify = true
 Target = "es2020"
 EntryPoints = ["index.ts"]
+
+
+
 
 
 [layer_build_definitions]

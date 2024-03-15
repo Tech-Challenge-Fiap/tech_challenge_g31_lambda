@@ -17,9 +17,10 @@ lint = true
 capabilities = "CAPABILITY_IAM"
 confirm_changeset = true
 resolve_s3 = true
-s3_prefix = "tech_challenge_g31_lambda"
-region = "us-east-1"
+s3_prefix = "tech-challenge-g31-lambda"
+region = "us-east-2"
 image_repositories = []
+stack_name = "tech-challenge-g31-lambda"
 
 [default.package.parameters]
 resolve_s3 = true
