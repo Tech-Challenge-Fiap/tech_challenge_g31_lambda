@@ -5,7 +5,7 @@ codeuri = "C:\\Users\\Pichau\\Documents\\projetos\\fiap\\tech_challenge_g31_lamb
 runtime = "nodejs16.x"
 architecture = "x86_64"
 handler = "validate-client/index.lambdaHandler"
-manifest_hash = "35ac7d3e6a4fb9e24ce98ded30529295"
+manifest_hash = "b693bb993d31fc80c145ced392934d2e"
 packagetype = "Zip"
 functions = ["ValidateClientFunction"]
 
@@ -16,6 +16,10 @@ BuildMethod = "esbuild"
 Minify = true
 Target = "es2020"
 EntryPoints = ["index.ts"]
+
+
+
+
 
 
 

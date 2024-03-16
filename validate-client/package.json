@@ -8,8 +8,10 @@
   "license": "MIT",
   "dependencies": {
     "cpf-cnpj-validator": "^1.0.3",
+    "crypto": "^1.0.1",
     "esbuild": "^0.14.14",
-    "jsonwebtoken": "^9.0.2"
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.11.3"
   },
   "scripts": {
     "unit": "jest",
@@ -23,6 +25,7 @@
     "@types/jest": "^29.4.0",
     "@types/jsonwebtoken": "^9.0.6",
     "@types/node": "^17.0.13",
+    "@types/pg": "^8.11.2",
     "@typescript-eslint/eslint-plugin": "^5.10.2",
     "@typescript-eslint/parser": "^5.10.2",
     "eslint": "^8.8.0",
