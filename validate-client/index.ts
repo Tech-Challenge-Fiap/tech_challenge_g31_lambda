@@ -6,6 +6,9 @@ import { isValidCpf } from './utils/isValidCpf';
 import { IClient } from './interfaces/IClient';
 import { findClientByCpf } from './utils/findClientByCpf';
 import { randomBytes } from 'crypto';
+import dotenv from "dotenv";
+
+dotenv.config();
 
 /**
  *
@@ -20,11 +23,11 @@ import { randomBytes } from 'crypto';
 export const lambdaHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     // let response: APIGatewayProxyResult;
     const client = new Client({
-        user: 'fiaptc_user',
-        host: 'fiaptc-db.cdgs0qagmcuo.us-east-2.rds.amazonaws.com',
-        database: 'fiaptc_db',
-        password: 'fiaptc-dbpass',
-        port: 5432,
+        user: process.env.DB_USER,
+        host: process.env.DB_HOST,
+        database: process.env.DB_DATABASE,
+        password: process.env.DB_PASSWORD,
+        port: Number(process.env.DB_PORT),
     });
 
     const secretKey = randomBytes(32).toString('base64');
@@ -51,25 +54,29 @@ export const lambdaHandler = async (event: APIGatewayProxyEvent): Promise<APIGat
 				statusCode: 400,
 				body: JSON.stringify({ message: "CPF inválido" }),
 			};
-		}
+		} else {
+            await client.end();
+            await client.connect();
+    
+            const clienteTeste = await findClientByCpf(cpf, client) as IClient[];
 
-        await client.connect()
-
-        const clienteTeste = await findClientByCpf(cpf, client) as IClient[];
-
-        if (clienteTeste[0]) {
-            return {
-				statusCode: 200,
-				body: JSON.stringify({
-					token: generateJWT(secretKey, clienteTeste[0]),
-				}),
-			};
-        } else {
-            return {
-				statusCode: 404,
-				body: JSON.stringify({ message: "Cliente não encontrado" }),
-			};
+            await client.end();
+    
+            if (clienteTeste[0]) {
+                return {
+                    statusCode: 200,
+                    body: JSON.stringify({
+                        token: generateJWT(secretKey, clienteTeste[0]),
+                    }),
+                };
+            } else {
+                return {
+                    statusCode: 404,
+                    body: JSON.stringify({ message: "Cliente não encontrado" }),
+                };
+            }
         }
+
     } catch (err: unknown) {
         console.error(err);
         return {

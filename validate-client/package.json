@@ -7,8 +7,10 @@
   "author": "SAM CLI",
   "license": "MIT",
   "dependencies": {
+    "aws-sdk": "^2.1579.0",
     "cpf-cnpj-validator": "^1.0.3",
     "crypto": "^1.0.1",
+    "dotenv": "^16.4.5",
     "esbuild": "^0.14.14",
     "jsonwebtoken": "^9.0.2",
     "pg": "^8.11.3"
