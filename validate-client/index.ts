@@ -3,7 +3,6 @@ import { APIGatewayProxyEvent,APIGatewayProxyResult } from 'aws-lambda';
 import { Client } from 'pg';
 import { generateJWT } from './utils/generateJwt';
 import { isValidCpf } from './utils/isValidCpf';
-import { randomBytes } from 'crypto';
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -17,7 +16,7 @@ export const lambdaHandler = async (event: APIGatewayProxyEvent): Promise<APIGat
         port: Number(process.env.DB_PORT),
     });
 
-    const secretKey = randomBytes(32).toString('base64');
+    const secretKey = process.env.JWT_SECRET_KEY + "";
 
     try {
         // WHEN CLIENT WANT TO GO AS ANONYMOUS
